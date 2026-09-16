@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://24k177lg37lo" path="res://Assets/Sprite-0001.png" id="2_tok1r"]
 [ext_resource type="Animation" uid="uid://oar8fgn458ou" path="res://Moves/Normals/Kick.res" id="3_ddoul"]
 [ext_resource type="PackedScene" uid="uid://bpn03kumm7bg2" path="res://Moves/Normals/kick.tscn" id="4_8g4oa"]
+[ext_resource type="Script" uid="uid://c8dhkqu8cxdia" path="res://Resources/InputBuffer.gd" id="4_vlldt"]
+
+[sub_resource type="Resource" id="Resource_anvdt"]
+script = ExtResource("4_vlldt")
+metadata/_custom_type_script = "uid://c8dhkqu8cxdia"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(126, 123)
@@ -52,6 +57,7 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim")]
 script = ExtResource("1_tok1r")
 anim = NodePath("AnimationPlayer")
+input_buffer = SubResource("Resource_anvdt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1764910802]
 scale = Vector2(7.97, 7.97)

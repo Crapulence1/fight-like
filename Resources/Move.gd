@@ -12,7 +12,7 @@ enum Guard {HIGH, LOW, ALL}
 @export_enum("High", "Low", "All") var guard 
 @export var animation_file_path : String
 
-func _init(_move_name: StringName, _frame_data : FrameData, _damage : float, _knock_back : float, _guard : Guard, _animation : Animation ) -> void:
+func _init(_move_name: StringName, _frame_data : FrameData, _damage : float, _knock_back : float, _guard : Guard) -> void:
 	move_name = _move_name
 	damage = _damage
 	frame_data = _frame_data

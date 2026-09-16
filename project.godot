@@ -8,6 +8,8 @@
 
 config_version=5
 
+show_default_buttons=false
+
 [application]
 
 config/name="FightLike"
@@ -30,7 +32,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/tool_button/plugin.cfg")
 
 [file_customization]
 
