@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cujnrkyd7tw8h"]
 
 [ext_resource type="PackedScene" uid="uid://bap7lqfd44x12" path="res://Player/Player.tscn" id="1_anvdt"]
+[ext_resource type="PackedScene" uid="uid://c4iqts8vkwnho" path="res://Moves/Normals/kick_card.tscn" id="2_qns0x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(478, 52)
@@ -17,3 +18,6 @@ shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Player" parent="." unique_id=1380681167 instance=ExtResource("1_anvdt")]
 position = Vector2(-6, -68)
+
+[node name="Kick_Card" parent="." unique_id=1638697528 instance=ExtResource("2_qns0x")]
+position = Vector2(160, -69)

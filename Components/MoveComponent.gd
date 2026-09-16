@@ -1,11 +1,20 @@
 extends Node
+class_name MovementComponent
 
+@export var Speed : float
+@export var Jump_height : float
+@export var body : CharacterBody2D
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var dir : int
+var wants_jump : bool
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func tick(delta : float) -> void:
+	
+	body.velocity.x = dir * Speed
+	
+	if wants_jump:
+		body.velocity.y = -Jump_height
+	
+	
+	
+	body.move_and_slide()

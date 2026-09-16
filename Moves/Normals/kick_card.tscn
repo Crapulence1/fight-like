@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c4iqts8vkwnho"]
+
+[ext_resource type="Script" uid="uid://d3vxo3178hew" path="res://Moves/Normals/kick_card.gd" id="1_5qid8"]
+[ext_resource type="Texture2D" uid="uid://c806jnko4814o" path="res://icon.svg" id="1_jpmaj"]
+[ext_resource type="Script" uid="uid://kcpdrvrcro46" path="res://Components/CardComponent.gd" id="3_rxshh"]
+[ext_resource type="Animation" uid="uid://oar8fgn458ou" path="res://Moves/Normals/Kick.res" id="4_osfm4"]
+[ext_resource type="Script" uid="uid://b5bgj0tx8hd5x" path="res://Resources/FrameData.gd" id="5_whonk"]
+[ext_resource type="Script" uid="uid://cgpltf3680182" path="res://Resources/Move.gd" id="6_c7fa0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(125, 122)
+
+[sub_resource type="Resource" id="Resource_375kp"]
+script = ExtResource("5_whonk")
+metadata/_custom_type_script = "uid://b5bgj0tx8hd5x"
+
+[sub_resource type="Resource" id="Resource_dfh13"]
+script = ExtResource("6_c7fa0")
+move_name = &"Kick"
+damage = 1.0
+frame_data = SubResource("Resource_375kp")
+knock_back = 1.0
+guard = 2
+animation = ExtResource("4_osfm4")
+metadata/_custom_type_script = "uid://cgpltf3680182"
+
+[node name="Kick_Card" type="Area2D" unique_id=1638697528 node_paths=PackedStringArray("card_component")]
+script = ExtResource("1_5qid8")
+card_component = NodePath("CardComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=907995333]
+rotation = 3.1415927
+texture = ExtResource("1_jpmaj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1874376260]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="CardComponent" type="Node" parent="." unique_id=2040083923]
+script = ExtResource("3_rxshh")
+move = SubResource("Resource_dfh13")
+metadata/_custom_type_script = "uid://kcpdrvrcro46"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
