@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bap7lqfd44x12"]
+
+[ext_resource type="Script" uid="uid://dtws8sbefm3s" path="res://Player/player.gd" id="1_tok1r"]
+[ext_resource type="Texture2D" uid="uid://24k177lg37lo" path="res://Assets/Sprite-0001.png" id="2_tok1r"]
+[ext_resource type="Animation" uid="uid://oar8fgn458ou" path="res://Moves/Normals/Kick.res" id="3_ddoul"]
+[ext_resource type="PackedScene" uid="uid://bpn03kumm7bg2" path="res://Moves/Normals/kick.tscn" id="4_8g4oa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(126, 123)
+
+[sub_resource type="Animation" id="Animation_8g4oa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ysni"]
+_data = {
+&"RESET": SubResource("Animation_8g4oa")
+}
+
+[sub_resource type="Animation" id="Animation_vlldt"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1rgi"]
+_data = {
+&"Idle": SubResource("Animation_vlldt"),
+&"Kick": ExtResource("3_ddoul")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim")]
+script = ExtResource("1_tok1r")
+anim = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1764910802]
+scale = Vector2(7.97, 7.97)
+texture = ExtResource("2_tok1r")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400970646]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=124377473]
+libraries/ = SubResource("AnimationLibrary_6ysni")
+libraries/Moves = SubResource("AnimationLibrary_s1rgi")
+
+[node name="moves_holder" type="Node2D" parent="." unique_id=1915266431]
+
+[node name="Kick" parent="moves_holder" unique_id=839839260 instance=ExtResource("4_8g4oa")]
