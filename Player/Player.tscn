@@ -5,8 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://24k177lg37lo" path="res://Assets/Sprite-0001.png" id="2_tok1r"]
 [ext_resource type="Script" uid="uid://dmkpgc5qwwfl5" path="res://Resources/MoveList.gd" id="3_j23h2"]
 [ext_resource type="Script" uid="uid://c8dhkqu8cxdia" path="res://Resources/InputBuffer.gd" id="4_vlldt"]
-[ext_resource type="Script" uid="uid://bcpo3sdusxnbu" path="res://Components/MoveComponent.gd" id="6_vlldt"]
+[ext_resource type="Script" uid="uid://bcpo3sdusxnbu" path="res://Components/MovementComponent.gd" id="6_vlldt"]
 [ext_resource type="Script" uid="uid://bwe6n4puhl0fm" path="res://Components/InputComponent.gd" id="7_s1rgi"]
+[ext_resource type="Script" uid="uid://cfkmv0qn2r2n0" path="res://Components/FlipComponent.gd" id="8_s1rgi"]
 
 [sub_resource type="Resource" id="Resource_6ysni"]
 script = ExtResource("3_j23h2")
@@ -39,13 +40,14 @@ _data = {
 &"RESET": SubResource("Animation_8g4oa")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component")]
+[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component")]
 script = ExtResource("1_tok1r")
 anim = NodePath("AnimationPlayer")
 move_list = SubResource("Resource_6ysni")
 input_buffer = SubResource("Resource_anvdt")
 input_component = NodePath("InputComponent")
 movement_component = NodePath("MovementComponent")
+flip_component = NodePath("FlipComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=587950298]
 scale = Vector2(7.97, 7.97)
@@ -63,10 +65,16 @@ libraries/ = SubResource("AnimationLibrary_6ysni")
 
 [node name="MovementComponent" type="Node" parent="." unique_id=658738254 node_paths=PackedStringArray("body")]
 script = ExtResource("6_vlldt")
-Speed = 200.0
+Speed = 500.0
+Jump_height = 2000.0
+gravity = 100.0
 body = NodePath("..")
 metadata/_custom_type_script = "uid://bcpo3sdusxnbu"
 
 [node name="InputComponent" type="Node" parent="." unique_id=856313911]
 script = ExtResource("7_s1rgi")
 metadata/_custom_type_script = "uid://bwe6n4puhl0fm"
+
+[node name="FlipComponent" type="Node" parent="." unique_id=89611092]
+script = ExtResource("8_s1rgi")
+metadata/_custom_type_script = "uid://cfkmv0qn2r2n0"

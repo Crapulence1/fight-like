@@ -1,6 +1,7 @@
 extends Resource
 class_name Move
 
+
 signal move_added
 
 enum Guard {HIGH, LOW, ALL}

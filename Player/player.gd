@@ -7,7 +7,12 @@ class_name Player
 
 @export var input_component : InputComponent
 @export var movement_component : MovementComponent
+@export var flip_component : FlipComponent
 
+static var player : Player = null
+
+func _enter_tree() -> void:
+	player = self
 
 
 func _ready() -> void:
@@ -18,12 +23,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	movement_component.dir = input_component.dir
-
+	movement_component.wants_jump = input_component.is_jump_pressed
+	input_component.is_jump_pressed = false
+	
 	movement_component.tick(delta)
 	
 	if Input.is_action_just_pressed("Kick"):
 		anim.play(str("Moves/", "Kick"))
-
 
 
 func add_move(move : Move) -> void:
