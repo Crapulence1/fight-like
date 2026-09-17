@@ -15,7 +15,6 @@ func _process(_delta: float) -> void:
 	if fight_started:
 		_check_player_side()
 	
-	
 	if Input.is_action_just_pressed("Debug"):
 		flip.emit()
 

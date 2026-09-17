@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bcpo3sdusxnbu" path="res://Components/MovementComponent.gd" id="6_vlldt"]
 [ext_resource type="Script" uid="uid://bwe6n4puhl0fm" path="res://Components/InputComponent.gd" id="7_s1rgi"]
 [ext_resource type="Script" uid="uid://cfkmv0qn2r2n0" path="res://Components/FlipComponent.gd" id="8_s1rgi"]
+[ext_resource type="PackedScene" uid="uid://dhjsivtkyi8gf" path="res://FrameData/FrameDataManager.tscn" id="9_j23h2"]
 
 [sub_resource type="Resource" id="Resource_6ysni"]
 script = ExtResource("3_j23h2")
@@ -35,9 +36,13 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_s1rgi"]
+resource_name = "new_animation"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ysni"]
 _data = {
-&"RESET": SubResource("Animation_8g4oa")
+&"RESET": SubResource("Animation_8g4oa"),
+&"new_animation": SubResource("Animation_s1rgi")
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component")]
@@ -75,6 +80,9 @@ metadata/_custom_type_script = "uid://bcpo3sdusxnbu"
 script = ExtResource("7_s1rgi")
 metadata/_custom_type_script = "uid://bwe6n4puhl0fm"
 
-[node name="FlipComponent" type="Node" parent="." unique_id=89611092]
+[node name="FlipComponent" type="Node" parent="." unique_id=89611092 node_paths=PackedStringArray("body")]
 script = ExtResource("8_s1rgi")
+body = NodePath("..")
 metadata/_custom_type_script = "uid://cfkmv0qn2r2n0"
+
+[node name="FrameDataManager" parent="." unique_id=1443492743 instance=ExtResource("9_j23h2")]
