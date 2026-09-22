@@ -8,6 +8,7 @@ class_name Player
 @export var input_component : InputComponent
 @export var movement_component : MovementComponent
 @export var flip_component : FlipComponent
+@export var frame_data_manager : FrameDataManager
 
 static var player : Player = null
 
@@ -29,10 +30,15 @@ func _process(delta: float) -> void:
 	movement_component.tick(delta)
 	
 	if Input.is_action_just_pressed("Kick"):
-		anim.play(str("Moves/", "Kick"))
+		frame_data_manager.start_attack("Kick")
 
 
 func add_move(move : Move) -> void:
 	move_list.move_list[move.move_name] = move
 	move_list.move_library.add_animation(move.move_name, move.animation)
 	print("Added move")
+
+
+func _on_hit_recieved(target : Node2D, damage : float) -> void:
+	
+	pass

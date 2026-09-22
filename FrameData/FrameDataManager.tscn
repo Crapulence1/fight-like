@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhjsivtkyi8gf"]
 
-[ext_resource type="Script" uid="uid://bx3ttl8ylliuk" path="res://FrameData/frame_data_manager.gd" id="1_l6mxb"]
+[ext_resource type="Script" uid="uid://b46xs7t3567e1" path="res://FrameData/FrameDataManager.gd" id="1_l6mxb"]
 
-[node name="FrameDataManager" type="Node2D" unique_id=1443492743]
+[node name="FrameDataManager" type="Area2D" unique_id=1988533302]
 script = ExtResource("1_l6mxb")

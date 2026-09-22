@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://drsdvjll8w151" path="res://Levels/fight_area.gd" id="1_6rhgg"]
 [ext_resource type="PackedScene" uid="uid://bap7lqfd44x12" path="res://Player/Player.tscn" id="1_r8j8c"]
 [ext_resource type="PackedScene" uid="uid://dx2ywf8p5sv02" path="res://Enemies/enemy.tscn" id="3_b5js2"]
+[ext_resource type="PackedScene" uid="uid://c4iqts8vkwnho" path="res://Moves/Normals/kick_card.tscn" id="4_68u05"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(502, 20)
@@ -31,4 +32,7 @@ position = Vector2(-44, -53)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093043639]
 
 [node name="Enemy" parent="." unique_id=380454827 instance=ExtResource("3_b5js2")]
-position = Vector2(64, -50)
+position = Vector2(575, -54)
+
+[node name="Kick_Card" parent="." unique_id=1638697528 instance=ExtResource("4_68u05")]
+position = Vector2(76, -47)

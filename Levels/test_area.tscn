@@ -20,4 +20,4 @@ shape = SubResource("RectangleShape2D_g4v7s")
 position = Vector2(-6, -68)
 
 [node name="Kick_Card" parent="." unique_id=1638697528 instance=ExtResource("2_qns0x")]
-position = Vector2(160, -69)
+position = Vector2(131, -69)

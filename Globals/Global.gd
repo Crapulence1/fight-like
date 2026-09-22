@@ -1,8 +1,11 @@
 extends Node
 
 var fight_manager : FightManager = null
+var hitbox_manager : HitboxManager
 
 func _ready() -> void:
+	hitbox_manager = HitboxManager.new()
+	add_child(hitbox_manager)
 	fight_manager = FightManager.new()
 	add_child(fight_manager)
 	print(fight_manager)

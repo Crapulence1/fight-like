@@ -5,10 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://24k177lg37lo" path="res://Assets/Sprite-0001.png" id="2_tok1r"]
 [ext_resource type="Script" uid="uid://dmkpgc5qwwfl5" path="res://Resources/MoveList.gd" id="3_j23h2"]
 [ext_resource type="Script" uid="uid://c8dhkqu8cxdia" path="res://Resources/InputBuffer.gd" id="4_vlldt"]
+[ext_resource type="Animation" uid="uid://oar8fgn458ou" path="res://Moves/Normals/Kick.res" id="6_v0k0e"]
 [ext_resource type="Script" uid="uid://bcpo3sdusxnbu" path="res://Components/MovementComponent.gd" id="6_vlldt"]
 [ext_resource type="Script" uid="uid://bwe6n4puhl0fm" path="res://Components/InputComponent.gd" id="7_s1rgi"]
 [ext_resource type="Script" uid="uid://cfkmv0qn2r2n0" path="res://Components/FlipComponent.gd" id="8_s1rgi"]
-[ext_resource type="PackedScene" uid="uid://dhjsivtkyi8gf" path="res://FrameData/FrameDataManager.tscn" id="9_j23h2"]
+[ext_resource type="Script" uid="uid://b46xs7t3567e1" path="res://FrameData/FrameDataManager.gd" id="9_0j2ni"]
+[ext_resource type="Script" uid="uid://in7tde8qub8b" path="res://FrameData/MoveFrameData.gd" id="10_v0k0e"]
+[ext_resource type="Script" uid="uid://cpeljvwm2jk0k" path="res://FrameData/Frame.gd" id="12_5wa8t"]
 
 [sub_resource type="Resource" id="Resource_6ysni"]
 script = ExtResource("3_j23h2")
@@ -41,11 +44,18 @@ resource_name = "new_animation"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ysni"]
 _data = {
+&"Kick": ExtResource("6_v0k0e"),
 &"RESET": SubResource("Animation_8g4oa"),
 &"new_animation": SubResource("Animation_s1rgi")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wa8t"]
+size = Vector2(57, 250)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7tob"]
+size = Vector2(63, 200)
+
+[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager")]
 script = ExtResource("1_tok1r")
 anim = NodePath("AnimationPlayer")
 move_list = SubResource("Resource_6ysni")
@@ -53,6 +63,7 @@ input_buffer = SubResource("Resource_anvdt")
 input_component = NodePath("InputComponent")
 movement_component = NodePath("MovementComponent")
 flip_component = NodePath("FlipComponent")
+frame_data_manager = NodePath("FrameDataManager")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=587950298]
 scale = Vector2(7.97, 7.97)
@@ -71,7 +82,7 @@ libraries/ = SubResource("AnimationLibrary_6ysni")
 [node name="MovementComponent" type="Node" parent="." unique_id=658738254 node_paths=PackedStringArray("body")]
 script = ExtResource("6_vlldt")
 Speed = 500.0
-Jump_height = 2000.0
+Jump_height = 3000.0
 gravity = 100.0
 body = NodePath("..")
 metadata/_custom_type_script = "uid://bcpo3sdusxnbu"
@@ -85,4 +96,38 @@ script = ExtResource("8_s1rgi")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://cfkmv0qn2r2n0"
 
-[node name="FrameDataManager" parent="." unique_id=1443492743 instance=ExtResource("9_j23h2")]
+[node name="FrameDataManager" type="Node2D" parent="." unique_id=957389758 node_paths=PackedStringArray("sprite", "anim")]
+script = ExtResource("9_0j2ni")
+sprite = NodePath("../Sprite2D")
+anim = NodePath("../AnimationPlayer")
+metadata/_custom_type_script = "uid://b46xs7t3567e1"
+
+[node name="Kick" type="Area2D" parent="FrameDataManager" unique_id=818929954]
+monitoring = false
+monitorable = false
+script = ExtResource("10_v0k0e")
+frame_script = ExtResource("12_5wa8t")
+anim_name = "Kick"
+metadata/_custom_type_script = "uid://in7tde8qub8b"
+
+[node name="Frame0_Empty" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1274405157]
+position = Vector2(10, 0)
+scale = Vector2(1, 0.1)
+disabled = true
+script = ExtResource("12_5wa8t")
+
+[node name="Frame1_Single" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=594574419]
+position = Vector2(36.5, 40.5)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_5wa8t")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 1
+
+[node name="Frame2_Single" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=417877864]
+position = Vector2(39.5, 32)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_p7tob")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 1

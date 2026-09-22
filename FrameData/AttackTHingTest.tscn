@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c01tmjfgjvqo6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wa8t"]
+resource_local_to_scene = true
+
+[node name="AttackTHingTest" type="Area2D" unique_id=2077459831]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1887784557]
+shape = SubResource("RectangleShape2D_5wa8t")
