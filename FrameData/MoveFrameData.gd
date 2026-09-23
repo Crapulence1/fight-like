@@ -47,23 +47,23 @@ func add_single_frame() -> void:
 	
 	
 func add_multi_frame() -> void:
-	print(char(66))
-	pass
-	#var hitbox = CollisionShape2D.new()
-	#hitbox.name = "Frame" + str((get_child_count())) + "_Single"
-	#
-	#var shape = RectangleShape2D.new()
-	#shape.size = Vector2(20, 160)
-	#hitbox.shape = shape
-	#hitbox.disabled = true
-	#hitbox.position = Vector2(10, 0)
-	#hitbox.scale = Vector2(1, 0.1)
-	#hitbox.top_level = false
-	#
-	#hitbox.set_script(frame_script)
-	#hitbox.type = hitbox.FrameType.SINGLE
-	#add_child(hitbox)
-	#hitbox.owner = get_tree().edited_scene_root
+	var frame_index : int = get_child_count()
+	for i in range(2):
+		var hitbox = CollisionShape2D.new()
+		hitbox.name = "Frame" + str(frame_index) + "_" + char(65 + i)
+		
+		var shape = RectangleShape2D.new()
+		shape.size = Vector2(20, 160)
+		hitbox.shape = shape
+		hitbox.disabled = true
+		hitbox.position = Vector2(10, 0)
+		hitbox.scale = Vector2(1, 0.1)
+		hitbox.top_level = false
+		
+		hitbox.set_script(frame_script)
+		hitbox.type = hitbox.FrameType.MULTI
+		add_child(hitbox)
+		hitbox.owner = get_tree().edited_scene_root
 
 func add_hitbox_to_frame(frame_index : int) -> void:
 	var frame : Frame = get_child(frame_index)

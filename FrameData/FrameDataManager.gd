@@ -7,6 +7,7 @@ class_name FrameDataManager
 
 var is_attack_active : bool = false
 var active_move : MoveFrameData
+var frame_index : int = 0
 
 func _ready() -> void:
 	_setup_sprite_connection()
@@ -20,19 +21,24 @@ func start_attack(move : String) -> void:
 
 func _on_frame_changed() -> void:
 	if is_attack_active:
-		
-		active_move.get_child(sprite.frame - 2).disabled = true
+		if frame_index > 0:
+			active_move.get_child(sprite.frame - 2).disabled = true
 		
 		
 		
 		#Activates every frame that is in the multi-frame
-		if active_move.get_child(sprite.frame - 1).type == active_move.get_child(sprite.frame - 1).FrameType.MULTI:
-			var frame_name : String = active_move.get_child(sprite.frame - 1).name.replace("_Multi", "")
-			for i in get_children():
+		if active_move.get_child(frame_index).type == active_move.get_child(frame_index).FrameType.MULTI:
+			var frame_name : String = active_move.get_child(frame_index).name.get_slice("_", 0)
+			print(frame_name)
+			for i in active_move.get_children():
 				if i.name.contains(frame_name):
+					print("frame_change")
+					frame_index+=1
 					i.disabled = false
 		else:
-			active_move.get_child(sprite.frame - 1).disabled = false
+			active_move.get_child(frame_index).disabled = false
+			frame_index+=1
+			
 		
 
 
