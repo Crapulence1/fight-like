@@ -20,13 +20,21 @@ func start_attack(move : String) -> void:
 
 func _on_frame_changed() -> void:
 	if is_attack_active:
+		
 		active_move.get_child(sprite.frame - 2).disabled = true
-		print(active_move.get_child(sprite.frame - 1))
-		print(sprite.frame)
-		active_move.get_child(sprite.frame - 1).disabled = false
 		
 		
 		
+		#Activates every frame that is in the multi-frame
+		if active_move.get_child(sprite.frame - 1).type == active_move.get_child(sprite.frame - 1).FrameType.MULTI:
+			var frame_name : String = active_move.get_child(sprite.frame - 1).name.replace("_Multi", "")
+			for i in get_children():
+				if i.name.contains(frame_name):
+					i.disabled = false
+		else:
+			active_move.get_child(sprite.frame - 1).disabled = false
+		
+
 
 func _on_anim_changed() -> void:
 	print("Current animation is " + str(anim.current_animation))
