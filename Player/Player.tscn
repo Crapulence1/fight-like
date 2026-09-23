@@ -49,24 +49,6 @@ _data = {
 &"new_animation": SubResource("Animation_s1rgi")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wa8t"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7tob"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm7nj"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mea3"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v5gs"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sa4y"]
-size = Vector2(20, 160)
-
 [node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager")]
 script = ExtResource("1_tok1r")
 anim = NodePath("AnimationPlayer")
@@ -121,51 +103,3 @@ script = ExtResource("10_v0k0e")
 frame_script = ExtResource("12_5wa8t")
 anim_name = "Kick"
 metadata/_custom_type_script = "uid://in7tde8qub8b"
-
-[node name="Frame0_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1963888016]
-position = Vector2(55, -23)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_5wa8t")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2
-
-[node name="Frame0_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=77201005]
-position = Vector2(80, -21)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_p7tob")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2
-
-[node name="Frame2_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=620674807]
-position = Vector2(57, -2)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_dm7nj")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2
-
-[node name="Frame2_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=644517668]
-position = Vector2(82, 0)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_3mea3")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2
-
-[node name="Frame4_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1017455522]
-position = Vector2(59, 19)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_7v5gs")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2
-
-[node name="Frame4_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=321532593]
-position = Vector2(86, 21)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_8sa4y")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2

@@ -6,6 +6,7 @@ class_name MoveFrameData
 @export var anim_name: String = ""
 
 var isAttackActive: bool = false
+var frame_index : int = 0
 
 func _ready() -> void:
 	monitoring = false
@@ -26,6 +27,7 @@ func add_empty_frame() -> void:
 	hitbox.type = hitbox.FrameType.EMPTY
 	add_child(hitbox)
 	hitbox.owner = get_tree().edited_scene_root
+	frame_index += 1
 
 func add_single_frame() -> void:
 	var hitbox = CollisionShape2D.new()
@@ -43,11 +45,11 @@ func add_single_frame() -> void:
 	hitbox.type = hitbox.FrameType.SINGLE
 	add_child(hitbox)
 	hitbox.owner = get_tree().edited_scene_root
+	frame_index += 1
 	
 	
 	
 func add_multi_frame() -> void:
-	var frame_index : int = get_child_count()
 	for i in range(2):
 		var hitbox = CollisionShape2D.new()
 		hitbox.name = "Frame" + str(frame_index) + "_" + char(65 + i)
@@ -64,6 +66,8 @@ func add_multi_frame() -> void:
 		hitbox.type = hitbox.FrameType.MULTI
 		add_child(hitbox)
 		hitbox.owner = get_tree().edited_scene_root
+	frame_index += 1
+	
 
 func add_hitbox_to_frame(frame_index : int) -> void:
 	var frame : Frame = get_child(frame_index)
@@ -83,6 +87,7 @@ func clear_frames() -> void:
 		remove_child(i)
 		i.queue_free()
 	print("Cleared frames")
+	frame_index = 0
 
 func _get_tool_buttons() -> Array:
 	return [
