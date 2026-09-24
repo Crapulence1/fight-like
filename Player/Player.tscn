@@ -12,6 +12,10 @@
 [ext_resource type="Script" uid="uid://b46xs7t3567e1" path="res://FrameData/FrameDataManager.gd" id="9_0j2ni"]
 [ext_resource type="Script" uid="uid://in7tde8qub8b" path="res://FrameData/MoveFrameData.gd" id="10_v0k0e"]
 [ext_resource type="Script" uid="uid://cpeljvwm2jk0k" path="res://FrameData/Frame.gd" id="12_5wa8t"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="13_7v5gs"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="14_8sa4y"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="15_3nb2p"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="16_d7xyo"]
 
 [sub_resource type="Resource" id="Resource_6ysni"]
 script = ExtResource("3_j23h2")
@@ -49,7 +53,25 @@ _data = {
 &"new_animation": SubResource("Animation_s1rgi")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wa8t"]
+size = Vector2(20, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7tob"]
+size = Vector2(20, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm7nj"]
+size = Vector2(20, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mea3"]
+size = Vector2(20, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v5gs"]
+size = Vector2(20, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sa4y"]
+size = Vector2(20, 160)
+
+[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager", "state")]
 script = ExtResource("1_tok1r")
 anim = NodePath("AnimationPlayer")
 move_list = SubResource("Resource_6ysni")
@@ -58,6 +80,7 @@ input_component = NodePath("InputComponent")
 movement_component = NodePath("MovementComponent")
 flip_component = NodePath("FlipComponent")
 frame_data_manager = NodePath("FrameDataManager")
+state = NodePath("StateChart")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=587950298]
 scale = Vector2(7.97, 7.97)
@@ -103,3 +126,77 @@ script = ExtResource("10_v0k0e")
 frame_script = ExtResource("12_5wa8t")
 anim_name = "Kick"
 metadata/_custom_type_script = "uid://in7tde8qub8b"
+
+[node name="Frame0_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1029567387]
+position = Vector2(43, -12)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_5wa8t")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="Frame0_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1248646852]
+position = Vector2(69, -11)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_p7tob")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="Frame1_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=356923301]
+position = Vector2(42, 9)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_dm7nj")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="Frame1_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=331795045]
+position = Vector2(71, 10)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_3mea3")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="Frame2_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=812274270]
+position = Vector2(73, 32)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_7v5gs")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="Frame2_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=260766883]
+position = Vector2(45, 31)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_8sa4y")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="StateChart" type="Node" parent="." unique_id=1765450883]
+script = ExtResource("13_7v5gs")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="StateChart" unique_id=1654943470]
+script = ExtResource("14_8sa4y")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/CompoundState" unique_id=2106933050]
+script = ExtResource("15_3nb2p")
+
+[node name="to_walk" type="Node" parent="StateChart/CompoundState/Idle" unique_id=1997470014]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../Walk")
+event = &"walking"
+delay_in_seconds = "0.0"
+
+[node name="Walk" type="Node" parent="StateChart/CompoundState" unique_id=489888211]
+script = ExtResource("15_3nb2p")
+
+[node name="to_idle" type="Node" parent="StateChart/CompoundState/Walk" unique_id=517852392]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../Idle")
+event = &"not_walking"
+delay_in_seconds = "0.0"

@@ -18,7 +18,7 @@ func _init(
 	 _frame_data : FrameData = null,
 	 _damage : float = 0.0,
 	 _knock_back : float = 0.0,
-	 _guard : Guard = Guard.ALL,
+	 _guard : Move.Guard = Guard.ALL,
 	 _animation : Animation = null
 	) -> void:
 	move_name = _move_name

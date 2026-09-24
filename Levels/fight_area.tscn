@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bap7lqfd44x12" path="res://Player/Player.tscn" id="1_r8j8c"]
 [ext_resource type="PackedScene" uid="uid://dx2ywf8p5sv02" path="res://Enemies/enemy.tscn" id="3_b5js2"]
 [ext_resource type="PackedScene" uid="uid://c4iqts8vkwnho" path="res://Moves/Normals/kick_card.tscn" id="4_68u05"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_h7pdi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(502, 20)
@@ -36,3 +37,12 @@ position = Vector2(575, -54)
 
 [node name="Kick_Card" parent="." unique_id=1638697528 instance=ExtResource("4_68u05")]
 position = Vector2(76, -47)
+
+[node name="StateChartDebugger" parent="." unique_id=1335936759 instance=ExtResource("5_h7pdi")]
+offset_left = -235.0
+offset_top = -124.0
+offset_right = -79.0
+offset_bottom = 4.0
+initial_node_to_watch = NodePath("../Player/StateChart")
+
+[editable path="Player"]

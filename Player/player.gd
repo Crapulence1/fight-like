@@ -9,6 +9,7 @@ class_name Player
 @export var movement_component : MovementComponent
 @export var flip_component : FlipComponent
 @export var frame_data_manager : FrameDataManager
+@export var state : StateChart
 
 static var player : Player = null
 
@@ -31,7 +32,11 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Kick"):
 		frame_data_manager.start_attack("Kick")
-
+	
+	if velocity.x != 0:
+		state.send_event("walking")
+	else:
+		state.send_event("not_walking")
 
 func add_move(move : Move) -> void:
 	move_list.move_list[move.move_name] = move

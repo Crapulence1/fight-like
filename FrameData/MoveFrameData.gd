@@ -79,8 +79,6 @@ func add_hitbox_to_frame(frame_index : int) -> void:
 	if frame.type == frame.FrameType.SINGLE:
 		frame.type = frame.FrameType.MULTI
 		
-	
-
 
 func clear_frames() -> void:
 	for i in get_children():
