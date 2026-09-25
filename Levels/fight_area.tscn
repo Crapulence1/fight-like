@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_h7pdi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(502, 20)
+size = Vector2(1328, 20)
 
 [node name="fight_area" type="Node2D" unique_id=1396031564 node_paths=PackedStringArray("spawn1", "spawn2", "enemy")]
 script = ExtResource("1_6rhgg")
@@ -19,6 +19,7 @@ enemy = NodePath("Enemy")
 position = Vector2(0, 46)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1106473290]
+position = Vector2(7, 1)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="spawn1" type="Marker2D" parent="." unique_id=2013244130]
@@ -28,21 +29,19 @@ position = Vector2(-148, -93)
 position = Vector2(221, 7)
 
 [node name="Player" parent="." unique_id=1380681167 instance=ExtResource("1_r8j8c")]
-position = Vector2(-44, -53)
+position = Vector2(-169, -54)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093043639]
 
 [node name="Enemy" parent="." unique_id=380454827 instance=ExtResource("3_b5js2")]
-position = Vector2(575, -54)
+position = Vector2(82, -57)
 
 [node name="Kick_Card" parent="." unique_id=1638697528 instance=ExtResource("4_68u05")]
-position = Vector2(76, -47)
+position = Vector2(351, -240)
 
 [node name="StateChartDebugger" parent="." unique_id=1335936759 instance=ExtResource("5_h7pdi")]
-offset_left = -235.0
-offset_top = -124.0
-offset_right = -79.0
-offset_bottom = 4.0
+offset_left = -565.0
+offset_top = -314.0
+offset_right = -286.0
+offset_bottom = -82.0
 initial_node_to_watch = NodePath("../Player/StateChart")
-
-[editable path="Player"]

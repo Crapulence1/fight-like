@@ -2,6 +2,10 @@
 extends Node2D
 class_name FrameDataManager
 
+signal started_attack
+signal finished_attack
+
+
 @export var sprite: Sprite2D
 @export var anim : AnimationPlayer
 
@@ -16,8 +20,11 @@ func _ready() -> void:
 
 func start_attack(move : String) -> void:
 	is_attack_active = true
-	anim.play("Moves/" + move)
+	anim.play(move)
+	
+	#TODO change this
 	active_move = get_node(move)
+	started_attack.emit()
 
 
 func _on_frame_changed() -> void:
@@ -34,10 +41,8 @@ func _on_frame_changed() -> void:
 		
 		var frame_name : String = active_move.get_child(frame_index).name.get_slice("_", 0)
 		
-		print(frame_name)
 		for i in active_move.get_children():
 			if i.name.contains(frame_name):
-				print("frame_change")
 				frame_index+=1
 				i.disabled = false
 		last_frame = frame_name
@@ -50,7 +55,14 @@ func _on_frame_changed() -> void:
 
 func _on_anim_changed() -> void:
 	print("Current animation is " + str(anim.current_animation))
-	
+
+func _on_anim_finished(anim_name : String) -> void:
+	if is_attack_active:
+		frame_index = 0
+		print(anim_name + " animation finished!")
+		finished_attack.emit()
+		is_attack_active = false
+
 
 func _setup_sprite_connection() -> void:
 	if not sprite:
@@ -68,8 +80,10 @@ func _setup_anim_connection() -> void:
 	if anim.animation_changed.is_connected(_on_anim_changed):
 		anim.animation_changed.disconnect(_on_anim_changed)
 	anim.animation_changed.connect(_on_anim_changed)
-
-
+	
+	if anim.animation_finished.is_connected(_on_anim_finished):
+		anim.animation_finished.disconnect(_on_anim_finished)
+	anim.animation_finished.connect(_on_anim_finished)
 
 
 func add_move(move : MoveFrameData) -> void:

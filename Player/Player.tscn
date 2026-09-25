@@ -2,17 +2,19 @@
 
 [ext_resource type="Script" uid="uid://dtws8sbefm3s" path="res://Player/player.gd" id="1_tok1r"]
 [ext_resource type="Script" uid="uid://cgpltf3680182" path="res://Resources/Move.gd" id="2_s1rgi"]
-[ext_resource type="Texture2D" uid="uid://24k177lg37lo" path="res://Assets/Sprite-0001.png" id="2_tok1r"]
 [ext_resource type="Script" uid="uid://dmkpgc5qwwfl5" path="res://Resources/MoveList.gd" id="3_j23h2"]
 [ext_resource type="Script" uid="uid://c8dhkqu8cxdia" path="res://Resources/InputBuffer.gd" id="4_vlldt"]
+[ext_resource type="Texture2D" uid="uid://cw44nanex44rs" path="res://Assets/player_spritesheet.png" id="5_3nb2p"]
 [ext_resource type="Animation" uid="uid://oar8fgn458ou" path="res://Moves/Normals/Kick.res" id="6_v0k0e"]
 [ext_resource type="Script" uid="uid://bcpo3sdusxnbu" path="res://Components/MovementComponent.gd" id="6_vlldt"]
 [ext_resource type="Script" uid="uid://bwe6n4puhl0fm" path="res://Components/InputComponent.gd" id="7_s1rgi"]
 [ext_resource type="Script" uid="uid://cfkmv0qn2r2n0" path="res://Components/FlipComponent.gd" id="8_s1rgi"]
 [ext_resource type="Script" uid="uid://b46xs7t3567e1" path="res://FrameData/FrameDataManager.gd" id="9_0j2ni"]
+[ext_resource type="Script" uid="uid://c1ymc2vwkmudv" path="res://Components/StateComponent.gd" id="10_3nb2p"]
 [ext_resource type="Script" uid="uid://in7tde8qub8b" path="res://FrameData/MoveFrameData.gd" id="10_v0k0e"]
 [ext_resource type="Script" uid="uid://cpeljvwm2jk0k" path="res://FrameData/Frame.gd" id="12_5wa8t"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="13_7v5gs"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="14_3mea3"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="14_8sa4y"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="15_3nb2p"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="16_d7xyo"]
@@ -43,35 +45,76 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_3nb2p"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_s1rgi"]
 resource_name = "new_animation"
+
+[sub_resource type="Animation" id="Animation_d7xyo"]
+resource_name = "walk"
+length = 0.76666665
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.53333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ysni"]
 _data = {
 &"Kick": ExtResource("6_v0k0e"),
 &"RESET": SubResource("Animation_8g4oa"),
-&"new_animation": SubResource("Animation_s1rgi")
+&"idle": SubResource("Animation_3nb2p"),
+&"new_animation": SubResource("Animation_s1rgi"),
+&"walk": SubResource("Animation_d7xyo")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wa8t"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nb2p"]
 size = Vector2(20, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7tob"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7xyo"]
 size = Vector2(20, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm7nj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evw08"]
 size = Vector2(20, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mea3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_roy6y"]
 size = Vector2(20, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v5gs"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5tep"]
 size = Vector2(20, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sa4y"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ps8ct"]
 size = Vector2(20, 160)
 
-[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager", "state")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7uipr"]
+size = Vector2(20, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yifbt"]
+size = Vector2(20, 160)
+
+[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager", "state_component")]
 script = ExtResource("1_tok1r")
 anim = NodePath("AnimationPlayer")
 move_list = SubResource("Resource_6ysni")
@@ -80,12 +123,13 @@ input_component = NodePath("InputComponent")
 movement_component = NodePath("MovementComponent")
 flip_component = NodePath("FlipComponent")
 frame_data_manager = NodePath("FrameDataManager")
-state = NodePath("StateChart")
+state_component = NodePath("StateComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=587950298]
 scale = Vector2(7.97, 7.97)
-texture = ExtResource("2_tok1r")
+texture = ExtResource("5_3nb2p")
 hframes = 4
+vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400970646]
 position = Vector2(0, 5.5)
@@ -98,8 +142,9 @@ libraries/ = SubResource("AnimationLibrary_6ysni")
 
 [node name="MovementComponent" type="Node" parent="." unique_id=658738254 node_paths=PackedStringArray("body")]
 script = ExtResource("6_vlldt")
-Speed = 500.0
-Jump_height = 3000.0
+forward_speed = 500.0
+backward_speed = 200.0
+jump_height = 3000.0
 gravity = 100.0
 body = NodePath("..")
 metadata/_custom_type_script = "uid://bcpo3sdusxnbu"
@@ -112,6 +157,13 @@ metadata/_custom_type_script = "uid://bwe6n4puhl0fm"
 script = ExtResource("8_s1rgi")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://cfkmv0qn2r2n0"
+
+[node name="StateComponent" type="Node" parent="." unique_id=1242602498 node_paths=PackedStringArray("state_chart", "body", "anim")]
+script = ExtResource("10_3nb2p")
+state_chart = NodePath("../StateChart")
+body = NodePath("..")
+anim = NodePath("../AnimationPlayer")
+metadata/_custom_type_script = "uid://c1ymc2vwkmudv"
 
 [node name="FrameDataManager" type="Node2D" parent="." unique_id=957389758 node_paths=PackedStringArray("sprite", "anim")]
 script = ExtResource("9_0j2ni")
@@ -127,50 +179,66 @@ frame_script = ExtResource("12_5wa8t")
 anim_name = "Kick"
 metadata/_custom_type_script = "uid://in7tde8qub8b"
 
-[node name="Frame0_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1029567387]
-position = Vector2(43, -12)
+[node name="Frame0_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1064086227]
+position = Vector2(45, -23)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_5wa8t")
+shape = SubResource("RectangleShape2D_3nb2p")
 disabled = true
 script = ExtResource("12_5wa8t")
 type = 2
 
-[node name="Frame0_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1248646852]
-position = Vector2(69, -11)
+[node name="Frame0_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1103455532]
+position = Vector2(75, -23)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_p7tob")
+shape = SubResource("RectangleShape2D_d7xyo")
 disabled = true
 script = ExtResource("12_5wa8t")
 type = 2
 
-[node name="Frame1_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=356923301]
-position = Vector2(42, 9)
+[node name="Frame1_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1490513573]
+position = Vector2(47, -1)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_dm7nj")
+shape = SubResource("RectangleShape2D_evw08")
 disabled = true
 script = ExtResource("12_5wa8t")
 type = 2
 
-[node name="Frame1_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=331795045]
-position = Vector2(71, 10)
+[node name="Frame1_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=7292799]
+position = Vector2(77, -1)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_3mea3")
+shape = SubResource("RectangleShape2D_roy6y")
 disabled = true
 script = ExtResource("12_5wa8t")
 type = 2
 
-[node name="Frame2_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=812274270]
-position = Vector2(73, 32)
+[node name="Frame2_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=130303655]
+position = Vector2(47, 20)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_7v5gs")
+shape = SubResource("RectangleShape2D_u5tep")
 disabled = true
 script = ExtResource("12_5wa8t")
 type = 2
 
-[node name="Frame2_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=260766883]
-position = Vector2(45, 31)
+[node name="Frame2_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=669787693]
+position = Vector2(77, 22)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_8sa4y")
+shape = SubResource("RectangleShape2D_ps8ct")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="Frame3_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=115212863]
+position = Vector2(46, 42)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_7uipr")
+disabled = true
+script = ExtResource("12_5wa8t")
+type = 2
+
+[node name="Frame3_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=890082774]
+position = Vector2(79, 45)
+scale = Vector2(1, 0.1)
+shape = SubResource("RectangleShape2D_yifbt")
 disabled = true
 script = ExtResource("12_5wa8t")
 type = 2
@@ -179,24 +247,104 @@ type = 2
 script = ExtResource("13_7v5gs")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
-[node name="CompoundState" type="Node" parent="StateChart" unique_id=1654943470]
-script = ExtResource("14_8sa4y")
-initial_state = NodePath("Idle")
+[node name="root" type="Node" parent="StateChart" unique_id=1676632297]
+script = ExtResource("14_3mea3")
 
-[node name="Idle" type="Node" parent="StateChart/CompoundState" unique_id=2106933050]
+[node name="action" type="Node" parent="StateChart/root" unique_id=1059595106]
+script = ExtResource("14_8sa4y")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateChart/root/action" unique_id=1907433655]
 script = ExtResource("15_3nb2p")
 
-[node name="to_walk" type="Node" parent="StateChart/CompoundState/Idle" unique_id=1997470014]
+[node name="to_walk" type="Node" parent="StateChart/root/action/idle" unique_id=1953592042]
 script = ExtResource("16_d7xyo")
-to = NodePath("../../Walk")
+to = NodePath("../../walk")
 event = &"walking"
 delay_in_seconds = "0.0"
 
-[node name="Walk" type="Node" parent="StateChart/CompoundState" unique_id=489888211]
+[node name="to_attacking" type="Node" parent="StateChart/root/action/idle" unique_id=1473034035]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../attacking")
+event = &"attacking"
+delay_in_seconds = "0.0"
+
+[node name="to_crouch" type="Node" parent="StateChart/root/action/idle" unique_id=1118308856]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../crouch")
+event = &"crouching"
+delay_in_seconds = "0.0"
+
+[node name="walk" type="Node" parent="StateChart/root/action" unique_id=701748486]
 script = ExtResource("15_3nb2p")
 
-[node name="to_idle" type="Node" parent="StateChart/CompoundState/Walk" unique_id=517852392]
+[node name="to_idle" type="Node" parent="StateChart/root/action/walk" unique_id=1384104485]
 script = ExtResource("16_d7xyo")
-to = NodePath("../../Idle")
-event = &"not_walking"
+to = NodePath("../../idle")
+event = &"idle"
 delay_in_seconds = "0.0"
+
+[node name="to_attacking" type="Node" parent="StateChart/root/action/walk" unique_id=2009874811]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../attacking")
+event = &"attacking"
+delay_in_seconds = "0.0"
+
+[node name="to_crouch" type="Node" parent="StateChart/root/action/walk" unique_id=1514009370]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../crouch")
+event = &"crouching"
+delay_in_seconds = "0.0"
+
+[node name="attacking" type="Node" parent="StateChart/root/action" unique_id=1548285488]
+script = ExtResource("15_3nb2p")
+
+[node name="to_idle" type="Node" parent="StateChart/root/action/attacking" unique_id=2143187475]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../idle")
+event = &"finished_attack"
+delay_in_seconds = "0.0"
+
+[node name="crouch" type="Node" parent="StateChart/root/action" unique_id=1140676756]
+script = ExtResource("15_3nb2p")
+
+[node name="to_idle" type="Node" parent="StateChart/root/action/crouch" unique_id=1827544465]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../idle")
+event = &"uncrouching"
+delay_in_seconds = "0.0"
+
+[node name="ground_state" type="Node" parent="StateChart/root" unique_id=906417661]
+script = ExtResource("14_8sa4y")
+initial_state = NodePath("grounded")
+
+[node name="grounded" type="Node" parent="StateChart/root/ground_state" unique_id=807438179]
+script = ExtResource("15_3nb2p")
+
+[node name="to_airborne" type="Node" parent="StateChart/root/ground_state/grounded" unique_id=363478914]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../airborne")
+event = &"airborne"
+delay_in_seconds = "0.0"
+
+[node name="airborne" type="Node" parent="StateChart/root/ground_state" unique_id=1560037812]
+script = ExtResource("15_3nb2p")
+
+[node name="to_grounded" type="Node" parent="StateChart/root/ground_state/airborne" unique_id=942175459]
+script = ExtResource("16_d7xyo")
+to = NodePath("../../grounded")
+event = &"grounded"
+delay_in_seconds = "0.0"
+
+[connection signal="crouching" from="InputComponent" to="MovementComponent" method="_on_input_component_crouching"]
+[connection signal="crouching" from="InputComponent" to="StateComponent" method="_on_input_component_crouching"]
+[connection signal="uncrouching" from="InputComponent" to="MovementComponent" method="_on_input_component_uncrouching"]
+[connection signal="uncrouching" from="InputComponent" to="StateComponent" method="_on_input_component_uncrouching"]
+[connection signal="flipped" from="FlipComponent" to="MovementComponent" method="_on_flip_component_flipped"]
+[connection signal="finished_attack" from="FrameDataManager" to="MovementComponent" method="_on_frame_data_manager_finished_attack"]
+[connection signal="finished_attack" from="FrameDataManager" to="StateComponent" method="_on_frame_data_manager_finished_attack"]
+[connection signal="started_attack" from="FrameDataManager" to="MovementComponent" method="_on_frame_data_manager_started_attack"]
+[connection signal="started_attack" from="FrameDataManager" to="StateComponent" method="_on_frame_data_manager_started_attack"]
+[connection signal="state_entered" from="StateChart/root/action/idle" to="StateComponent" method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/root/action/walk" to="StateComponent" method="_on_walk_state_entered"]
+[connection signal="state_entered" from="StateChart/root/action/attacking" to="StateComponent" method="_on_attacking_state_entered"]

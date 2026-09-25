@@ -15,59 +15,46 @@ func _ready() -> void:
 		push_error("animationName must be set")
 
 func add_empty_frame() -> void:
-	var hitbox = CollisionShape2D.new()
+	var hitbox : CollisionShape2D = create_hitbox(true)
 	hitbox.name = "Frame" + str((get_child_count())) + "_Empty"
-	
-	hitbox.disabled = true
-	hitbox.position = Vector2(10, 0)
-	hitbox.scale = Vector2(1, 0.1)
-	hitbox.top_level = false
-	
-	hitbox.set_script(frame_script)
 	hitbox.type = hitbox.FrameType.EMPTY
-	add_child(hitbox)
-	hitbox.owner = get_tree().edited_scene_root
 	frame_index += 1
-
+	print(frame_index)
+	
 func add_single_frame() -> void:
-	var hitbox = CollisionShape2D.new()
+	var hitbox : CollisionShape2D = create_hitbox()
 	hitbox.name = "Frame" + str((get_child_count())) + "_Single"
-	
-	var shape = RectangleShape2D.new()
-	shape.size = Vector2(20, 160)
-	hitbox.shape = shape
-	hitbox.disabled = true
-	hitbox.position = Vector2(10, 0)
-	hitbox.scale = Vector2(1, 0.1)
-	hitbox.top_level = false
-	
-	hitbox.set_script(frame_script)
 	hitbox.type = hitbox.FrameType.SINGLE
-	add_child(hitbox)
-	hitbox.owner = get_tree().edited_scene_root
 	frame_index += 1
+	print(frame_index)
 	
 	
 	
 func add_multi_frame() -> void:
 	for i in range(2):
-		var hitbox = CollisionShape2D.new()
+		var hitbox : CollisionShape2D= create_hitbox()
 		hitbox.name = "Frame" + str(frame_index) + "_" + char(65 + i)
-		
+		hitbox.type = hitbox.FrameType.MULTI
+	frame_index += 1
+	print(frame_index)
+	
+	
+
+func create_hitbox(empty_hitbox : bool = false) -> CollisionShape2D:
+	var hitbox = CollisionShape2D.new()
+	if not empty_hitbox:
 		var shape = RectangleShape2D.new()
 		shape.size = Vector2(20, 160)
 		hitbox.shape = shape
-		hitbox.disabled = true
-		hitbox.position = Vector2(10, 0)
-		hitbox.scale = Vector2(1, 0.1)
-		hitbox.top_level = false
-		
-		hitbox.set_script(frame_script)
-		hitbox.type = hitbox.FrameType.MULTI
-		add_child(hitbox)
-		hitbox.owner = get_tree().edited_scene_root
-	frame_index += 1
+	hitbox.disabled = true
+	hitbox.position = Vector2(10, 0)
+	hitbox.scale = Vector2(1, 0.1)
+	hitbox.top_level = false
 	
+	hitbox.set_script(frame_script)
+	add_child(hitbox)
+	hitbox.owner = get_tree().edited_scene_root
+	return hitbox
 
 func add_hitbox_to_frame(frame_index : int) -> void:
 	var frame : Frame = get_child(frame_index)

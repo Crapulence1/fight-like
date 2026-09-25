@@ -2,6 +2,8 @@
 extends Node
 class_name Frame
 
+enum HitGuard {HIGH, LOW, ALL}
+
 enum FrameType {
 	EMPTY, 
 	SINGLE, 
@@ -13,6 +15,7 @@ enum FrameType {
 @export var knockback : Vector2
 @export var screenShake : float
 @export var hitStop : float
+@export var guard : HitGuard
 @export var status : Dictionary
 
 @export var new_frame_data = {
@@ -21,6 +24,7 @@ enum FrameType {
 	" ": Vector2(0, 0),
 	"screenShake": 0.0,
 	"hitStop": 0.0,
+	"guard": HitGuard.ALL,
 	"status": {}
 }
 
