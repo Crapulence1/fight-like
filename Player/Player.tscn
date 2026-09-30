@@ -4,14 +4,16 @@
 [ext_resource type="Script" uid="uid://cgpltf3680182" path="res://Resources/Move.gd" id="2_s1rgi"]
 [ext_resource type="Script" uid="uid://dmkpgc5qwwfl5" path="res://Resources/MoveList.gd" id="3_j23h2"]
 [ext_resource type="Script" uid="uid://c8dhkqu8cxdia" path="res://Resources/InputBuffer.gd" id="4_vlldt"]
-[ext_resource type="Texture2D" uid="uid://cw44nanex44rs" path="res://Assets/player_spritesheet.png" id="5_3nb2p"]
+[ext_resource type="Texture2D" uid="uid://cpuop2daf70wn" path="res://Assets/Martial Hero/Sprites/Run.png" id="5_evw08"]
 [ext_resource type="Animation" uid="uid://oar8fgn458ou" path="res://Moves/Normals/Kick.res" id="6_v0k0e"]
 [ext_resource type="Script" uid="uid://bcpo3sdusxnbu" path="res://Components/MovementComponent.gd" id="6_vlldt"]
+[ext_resource type="Texture2D" uid="uid://d0kr73w1vamli" path="res://Assets/Martial Hero/Sprites/Idle.png" id="7_roy6y"]
 [ext_resource type="Script" uid="uid://bwe6n4puhl0fm" path="res://Components/InputComponent.gd" id="7_s1rgi"]
 [ext_resource type="Script" uid="uid://cfkmv0qn2r2n0" path="res://Components/FlipComponent.gd" id="8_s1rgi"]
 [ext_resource type="Script" uid="uid://b46xs7t3567e1" path="res://FrameData/FrameDataManager.gd" id="9_0j2ni"]
 [ext_resource type="Script" uid="uid://c1ymc2vwkmudv" path="res://Components/StateComponent.gd" id="10_3nb2p"]
 [ext_resource type="Script" uid="uid://in7tde8qub8b" path="res://FrameData/MoveFrameData.gd" id="10_v0k0e"]
+[ext_resource type="Script" uid="uid://clb5xkc0u2yjn" path="res://Components/FightComponent.gd" id="11_d7xyo"]
 [ext_resource type="Script" uid="uid://cpeljvwm2jk0k" path="res://FrameData/Frame.gd" id="12_5wa8t"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="13_7v5gs"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="14_3mea3"]
@@ -28,7 +30,7 @@ script = ExtResource("4_vlldt")
 metadata/_custom_type_script = "uid://c8dhkqu8cxdia"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(22, 123)
+size = Vector2(62, 103)
 
 [sub_resource type="Animation" id="Animation_8g4oa"]
 length = 0.001
@@ -44,6 +46,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_evw08")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
 
 [sub_resource type="Animation" id="Animation_3nb2p"]
 resource_name = "idle"
@@ -55,10 +81,34 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.23333335, 0.36666667, 0.5, 0.6333334, 0.7666667, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [ExtResource("7_roy6y")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
 }
 
 [sub_resource type="Animation" id="Animation_s1rgi"]
@@ -66,7 +116,6 @@ resource_name = "new_animation"
 
 [sub_resource type="Animation" id="Animation_d7xyo"]
 resource_name = "walk"
-length = 0.76666665
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -75,46 +124,52 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.53333336),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.23333335, 0.36666667, 0.5, 0.6333334, 0.7666667, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 5]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_evw08")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ysni"]
 _data = {
-&"Kick": ExtResource("6_v0k0e"),
 &"RESET": SubResource("Animation_8g4oa"),
+&"Slash": ExtResource("6_v0k0e"),
 &"idle": SubResource("Animation_3nb2p"),
 &"new_animation": SubResource("Animation_s1rgi"),
 &"walk": SubResource("Animation_d7xyo")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nb2p"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7xyo"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_evw08"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_roy6y"]
-size = Vector2(20, 160)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5tep"]
-size = Vector2(20, 160)
+size = Vector2(113, 950)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ps8ct"]
-size = Vector2(20, 160)
+size = Vector2(131, 540)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7uipr"]
-size = Vector2(20, 160)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yifbt"]
-size = Vector2(20, 160)
-
-[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager", "state_component")]
+[node name="Player" type="CharacterBody2D" unique_id=1380681167 node_paths=PackedStringArray("anim", "input_component", "movement_component", "flip_component", "frame_data_manager", "state_component", "fight_component")]
 script = ExtResource("1_tok1r")
 anim = NodePath("AnimationPlayer")
 move_list = SubResource("Resource_6ysni")
@@ -124,21 +179,20 @@ movement_component = NodePath("MovementComponent")
 flip_component = NodePath("FlipComponent")
 frame_data_manager = NodePath("FrameDataManager")
 state_component = NodePath("StateComponent")
+fight_component = NodePath("FightComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=587950298]
-scale = Vector2(7.97, 7.97)
-texture = ExtResource("5_3nb2p")
-hframes = 4
-vframes = 4
+scale = Vector2(1.9599997, 1.9599997)
+texture = ExtResource("5_evw08")
+hframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400970646]
-position = Vector2(0, 5.5)
+position = Vector2(-5, -7.5)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=124377473]
 libraries/ = SubResource("AnimationLibrary_6ysni")
-
-[node name="moves_holder" type="Node2D" parent="." unique_id=1915266431]
+autoplay = &"idle"
 
 [node name="MovementComponent" type="Node" parent="." unique_id=658738254 node_paths=PackedStringArray("body")]
 script = ExtResource("6_vlldt")
@@ -165,13 +219,17 @@ body = NodePath("..")
 anim = NodePath("../AnimationPlayer")
 metadata/_custom_type_script = "uid://c1ymc2vwkmudv"
 
+[node name="FightComponent" type="Node" parent="." unique_id=989496112]
+script = ExtResource("11_d7xyo")
+metadata/_custom_type_script = "uid://clb5xkc0u2yjn"
+
 [node name="FrameDataManager" type="Node2D" parent="." unique_id=957389758 node_paths=PackedStringArray("sprite", "anim")]
 script = ExtResource("9_0j2ni")
 sprite = NodePath("../Sprite2D")
 anim = NodePath("../AnimationPlayer")
 metadata/_custom_type_script = "uid://b46xs7t3567e1"
 
-[node name="Kick" type="Area2D" parent="FrameDataManager" unique_id=818929954]
+[node name="Slash" type="Area2D" parent="FrameDataManager" unique_id=818929954]
 monitoring = false
 monitorable = false
 script = ExtResource("10_v0k0e")
@@ -179,69 +237,45 @@ frame_script = ExtResource("12_5wa8t")
 anim_name = "Kick"
 metadata/_custom_type_script = "uid://in7tde8qub8b"
 
-[node name="Frame0_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1064086227]
-position = Vector2(45, -23)
+[node name="Frame1_Empty" type="CollisionShape2D" parent="FrameDataManager/Slash" unique_id=1221889650]
+position = Vector2(10, 0)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_3nb2p")
 disabled = true
 script = ExtResource("12_5wa8t")
-type = 2
 
-[node name="Frame0_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1103455532]
-position = Vector2(75, -23)
+[node name="Frame2_Empty" type="CollisionShape2D" parent="FrameDataManager/Slash" unique_id=490706962]
+position = Vector2(10, 0)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_d7xyo")
 disabled = true
 script = ExtResource("12_5wa8t")
-type = 2
 
-[node name="Frame1_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=1490513573]
-position = Vector2(47, -1)
+[node name="Frame3_Empty" type="CollisionShape2D" parent="FrameDataManager/Slash" unique_id=1705460132]
+position = Vector2(10, 0)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_evw08")
 disabled = true
 script = ExtResource("12_5wa8t")
-type = 2
 
-[node name="Frame1_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=7292799]
-position = Vector2(77, -1)
+[node name="Frame4_Empty" type="CollisionShape2D" parent="FrameDataManager/Slash" unique_id=1146591965]
+position = Vector2(10, 0)
 scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_roy6y")
 disabled = true
 script = ExtResource("12_5wa8t")
-type = 2
 
-[node name="Frame2_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=130303655]
-position = Vector2(47, 20)
+[node name="Frame5_Single" type="CollisionShape2D" parent="FrameDataManager/Slash" unique_id=119809105]
+position = Vector2(68.5, -21.5)
 scale = Vector2(1, 0.1)
 shape = SubResource("RectangleShape2D_u5tep")
 disabled = true
 script = ExtResource("12_5wa8t")
-type = 2
+type = 1
 
-[node name="Frame2_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=669787693]
-position = Vector2(77, 22)
+[node name="Frame6_Single" type="CollisionShape2D" parent="FrameDataManager/Slash" unique_id=1635608826]
+position = Vector2(75.5, -42)
 scale = Vector2(1, 0.1)
 shape = SubResource("RectangleShape2D_ps8ct")
 disabled = true
 script = ExtResource("12_5wa8t")
-type = 2
-
-[node name="Frame3_A" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=115212863]
-position = Vector2(46, 42)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_7uipr")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2
-
-[node name="Frame3_B" type="CollisionShape2D" parent="FrameDataManager/Kick" unique_id=890082774]
-position = Vector2(79, 45)
-scale = Vector2(1, 0.1)
-shape = SubResource("RectangleShape2D_yifbt")
-disabled = true
-script = ExtResource("12_5wa8t")
-type = 2
+type = 1
 
 [node name="StateChart" type="Node" parent="." unique_id=1765450883]
 script = ExtResource("13_7v5gs")
@@ -336,11 +370,13 @@ to = NodePath("../../grounded")
 event = &"grounded"
 delay_in_seconds = "0.0"
 
+[connection signal="attack_pressed" from="InputComponent" to="FightComponent" method="_on_input_component_attack_pressed"]
 [connection signal="crouching" from="InputComponent" to="MovementComponent" method="_on_input_component_crouching"]
 [connection signal="crouching" from="InputComponent" to="StateComponent" method="_on_input_component_crouching"]
 [connection signal="uncrouching" from="InputComponent" to="MovementComponent" method="_on_input_component_uncrouching"]
 [connection signal="uncrouching" from="InputComponent" to="StateComponent" method="_on_input_component_uncrouching"]
 [connection signal="flipped" from="FlipComponent" to="MovementComponent" method="_on_flip_component_flipped"]
+[connection signal="move_chosen" from="FightComponent" to="FrameDataManager" method="_on_fight_component_move_chosen"]
 [connection signal="finished_attack" from="FrameDataManager" to="MovementComponent" method="_on_frame_data_manager_finished_attack"]
 [connection signal="finished_attack" from="FrameDataManager" to="StateComponent" method="_on_frame_data_manager_finished_attack"]
 [connection signal="started_attack" from="FrameDataManager" to="MovementComponent" method="_on_frame_data_manager_started_attack"]

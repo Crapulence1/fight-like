@@ -89,3 +89,7 @@ func _setup_anim_connection() -> void:
 func add_move(move : MoveFrameData) -> void:
 	add_child(move)
 	move.owner
+
+
+func _on_fight_component_move_chosen(move: Move) -> void:
+	start_attack(move.move_name)

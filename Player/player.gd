@@ -10,7 +10,7 @@ class_name Player
 @export var flip_component : FlipComponent
 @export var frame_data_manager : FrameDataManager
 @export var state_component : StateComponent
-
+@export var fight_component : FightComponent
 static var player : Player = null
 
 func _enter_tree() -> void:
@@ -18,9 +18,9 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	move_list.move_list["Kick"] = Move.new("Kick", FrameData.new(1, 1, 1, 1), 1, 1, Move.Guard.ALL, load("res://Moves/Normals/Kick.res"))
+	fight_component.moves.append(Move.new("Slash", [5], "Slash", load("res://Moves/Normals/Kick.res")))
 	anim.add_animation_library("Moves", move_list.move_library)
-	anim.play("idle")
+	#anim.play("idle")
 
 func _process(delta: float) -> void:
 	movement_component.dir = input_component.dir
@@ -29,12 +29,6 @@ func _process(delta: float) -> void:
 	
 	movement_component.tick(delta)
 	state_component.tick(delta)
-	
-	if Input.is_action_just_pressed("Kick"):
-		frame_data_manager.start_attack("Kick")
-	
-	
-	
 	
 
 func add_move(move : Move) -> void:

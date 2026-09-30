@@ -4,6 +4,7 @@ var fight_manager : FightManager = null
 var hitbox_manager : HitboxManager
 
 func _ready() -> void:
+	Engine.max_fps = 60
 	hitbox_manager = HitboxManager.new()
 	add_child(hitbox_manager)
 	fight_manager = FightManager.new()

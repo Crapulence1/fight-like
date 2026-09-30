@@ -15,19 +15,19 @@ var disable_movement : bool = false
 
 func tick(delta : float) -> void:
 	apply_gravity()
-	movement()
-	jump_logic()
+	if not disable_movement:
+		if body.is_on_floor():
+			movement()
+		jump_logic()
 	
 	body.move_and_slide()
 
 func jump_logic() -> void:
 	if body.is_on_floor():
 		has_jump = true
-		disable_movement = false
 	
 	if wants_jump and has_jump:
 		body.velocity.y = -jump_height
-		disable_movement = true
 		has_jump = false
 
 func movement() -> void:
